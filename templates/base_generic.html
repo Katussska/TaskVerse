@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <title>TaskVerse</title>
-    <!-- Styly pro menu -->
     <style>
         #menu {
             width: 200px;
@@ -25,14 +25,18 @@
         <div>
             <img src="user_id">
             <div>
-                <h4>Username</h4>
-                <p>Email</p>    
+                <h4>{{ request.user.username }}</h4>
+                <p>{{ request.user.email }}</p>
             </div>
         </div>
         <ul>
             <li><a href="/projects">Projects</a></li>
             <li><a href="/tasks">Tasks</a></li>
-            <li><a href="/users/<user_id>/">Profile</a></li>
+            <li><a href="/profile">Profile</a></li>
         </ul>
         <button>Log out</button>
     </div>
+{% block content %}
+{% endblock %}
+</body>
+</html>
