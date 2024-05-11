@@ -3,7 +3,7 @@ from projects.models import Project
 from projects.models import User
 
 
-class TaskTag(models.Model):
+class Tag(models.Model):
     DEFAULT_TAGS = [
         ('Bug', 'Bug'),
         ('Enhancement', 'Enhancement'),
@@ -45,7 +45,7 @@ class TaskTag(models.Model):
         super().save(*args, **kwargs)
 
 
-class TaskPriority(models.Model):
+class Priority(models.Model):
     LOW = 'Low'
     NORMAL = 'Normal'
     HIGH = 'High'
@@ -67,8 +67,8 @@ class TaskPriority(models.Model):
 class Task(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
-    priority = models.ForeignKey(TaskPriority, on_delete=models.CASCADE)
-    tags = models.ManyToManyField(TaskTag, related_name='tasks', blank=True)
+    priority = models.ForeignKey(Priority, on_delete=models.CASCADE)
+    tags = models.ManyToManyField(Tag, related_name='tasks', blank=True)
     status = models.CharField(max_length=100, choices=[('Not completed', 'Not completed'), ('Completed', 'Completed'),
                                                        ('In progress', 'In progress')])
     completion_date = models.DateTimeField(null=True, blank=True)
