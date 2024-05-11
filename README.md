@@ -10,5 +10,4 @@ collaborate with team members through comments.
 - **User Collaboration**: Engage in discussions and share insights with team members through comments.
 - **Intuitive Interface**: User-friendly design for easy navigation.
 
-TaskVerse is a school project aimed at demonstrating proficiency in Django framework and web application development. 
-
+TaskVerse is a school project aimed at familiarizing with the Django framework and web application development.
