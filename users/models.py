@@ -13,8 +13,10 @@ class User(AbstractBaseUser):
     password = models.CharField(max_length=128)
     registration_date = models.DateTimeField(auto_now_add=True)
     profile_picture = models.ImageField(upload_to='profile_pictures')
+    firstName = models.CharField(max_length=100, blank=True)  # new field
+    lastName = models.CharField(max_length=100, blank=True)  # new field
 
-    objects = UserManager()  # add this line
+    objects = UserManager()
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']

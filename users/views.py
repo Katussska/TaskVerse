@@ -1,17 +1,17 @@
-from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import render, redirect
 from django.contrib.auth.views import LoginView
+from django.shortcuts import render, redirect
 
+from .forms import CustomUserCreationForm  # import the custom form
 
 
 def register(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST, request.FILES)  # use the custom form
         if form.is_valid():
             form.save()
             return redirect('login')
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()  # use the custom form
     return render(request, 'user_register.html', {'form': form})
 
 
