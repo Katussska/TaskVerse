@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block base_content %}
+    <div class="container">
+        <div id="menu">
+            <h1>TaskVerse</h1>
+            <div>
+                {#        <img src="{{ request.user.profile_picture.url }}" alt="[profile picture]">#}
+                <div>
+                    <h4>{{ request.user.username }}</h4>
+                    <p>{{ request.user.email }}</p>
+                </div>
+            </div>
+            <ul>
+                <li><a href="/projects">Projects</a></li>
+                <li><a href="/tasks">Tasks</a></li>
+                <li><a href="/profile">Profile</a></li>
+            </ul>
+            <button>
+                <a href="{% url 'logout' %}">Log out</a>
+            </button>
+        </div>
+        {% block content %}
+        {% endblock %}
+    </div>
+{% endblock %}
