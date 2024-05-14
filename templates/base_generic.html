@@ -37,7 +37,9 @@
         <li><a href="/tasks">Tasks</a></li>
         <li><a href="/profile">Profile</a></li>
     </ul>
-    <button>Log out</button>
+    <button>
+    <a href="{% url 'logout' %}">Log out</a>
+    </button>
 </div>
 {% block content %}
 {% endblock %}

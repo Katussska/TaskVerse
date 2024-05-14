@@ -9,26 +9,34 @@
           crossorigin="anonymous">
     <title>TaskVerse</title>
 </head>
-<body>
-<h2>Register</h2>
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    {% if form.non_field_errors %}
-        <div class="alert alert-danger">
-            {{ form.non_field_errors }}
-        </div>
-    {% endif %}
-    {% for field in form %}
-        {% if field.errors %}
-            <div class="alert alert-danger">
-                {{ field.errors }}
+<body class="bg-gray-200">
+<div class="w-full max-w-xs mx-auto mt-20">
+    <h2 class="mb-6 text-3xl text-center">Register</h2>
+    <form method="post" enctype="multipart/form-data" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ field.id_for_label }}">
+                    {{ field.label }}
+                </label>
+                {{ field }}
+                {% if field.errors %}
+                    <div class="alert alert-danger">
+                        {{ field.errors }}
+                    </div>
+                {% endif %}
             </div>
-        {% endif %}
-    {% endfor %}
-    <button type="submit">Register</button>
-</form>
-<p>Do have an account? <a href="{% url 'login' %}">Login</a></p>
-
+        {% endfor %}
+        <div class="flex items-center justify-between">
+            <button type="submit"
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                Register
+            </button>
+            <p class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800">
+                Do have an account? <a href="{% url 'login' %}">Login</a>
+            </p>
+        </div>
+    </form>
+</div>
 </body>
 </html>

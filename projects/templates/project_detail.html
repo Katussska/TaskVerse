@@ -1,10 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base_generic.html' %}
 
-</body>
-</html>
+{% block content %}
+    <div id="content">
+        <h2>{{ project.name }}</h2>
+        <div>
+            details of the project
+            <h4>Founder: {{ project.founder.username }}</h4>
+            <p>
+                {{ project.description }}
+            </p>
+        </div>
+    </div>
+{% endblock %}

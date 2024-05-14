@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
+from django.views.generic import DetailView
 
 from .forms import ProjectForm
 from .models import Project
@@ -26,3 +27,8 @@ class ProjectCreateView(CreateView):
         response = super().form_valid(form)
         self.object.team.set(form.cleaned_data['team_usernames'])
         return response
+
+
+class ProjectDetailView(DetailView):
+    model = Project
+    template_name = 'project_detail.html'
