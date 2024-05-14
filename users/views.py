@@ -1,3 +1,4 @@
+from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect
 
@@ -19,3 +20,8 @@ class CustomLoginView(LoginView):
     template_name = 'user_login.html'
     redirect_authenticated_user = True
     next_page = '/projects/'
+
+
+class LogoutView(auth_views.LogoutView):
+    def get(self, request, *args, **kwargs):
+        return self.post(request, *args, **kwargs)
