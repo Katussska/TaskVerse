@@ -44,6 +44,28 @@ module.exports = {
         'node_modules/preline/dist/*.js',
     ],
     theme: {
+        textColor: {
+            DEFAULT: 'var(--text-color)'
+        },
+        colors: {
+            primary: {
+                DEFAULT: 'var(--primary)',
+            },
+            secondary: {
+                DEFAULT: 'var(--secondary)',
+            },
+            accent: {
+                DEFAULT: 'var(--accent)',
+            },
+            background: {
+                DEFAULT: 'var(--background)',
+            }
+        },
+        fontFamily: {
+            title: ['Assistant', 'sans-serif'],
+            paragraph: ['Work Sans', 'sans-serif'],
+            complementary: ['Hind Madurai', 'sans-serif'],
+        },
         extend: {},
     },
     plugins: [

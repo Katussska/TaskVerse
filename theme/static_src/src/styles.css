@@ -1,3 +1,88 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    :root {
+        --text-color: #18181b;
+        --background: #eaebec;
+
+        --primary-50: #E5E5F5;
+        --primary-100: #C7C7EA;
+        --primary-200: #9393D7;
+        --primary-300: #5B5BC3;
+        --primary-400: #39399D;
+        --primary: #252565;
+        --primary-600: #1E1E52;
+        --primary-700: #16163C;
+        --primary-800: #0F0F29;
+        --primary-900: #070713;
+        --primary-950: #04040B;
+
+        --secondary-50: #F3F3FB;
+        --secondary-100: #E4E4F7;
+        --secondary-200: #CCCCF0;
+        --secondary-300: #B1B1E7;
+        --secondary-400: #9999E0;
+        --secondary: #7D7DD8;
+        --secondary-600: #4B4BC9;
+        --secondary-700: #2F2F9D;
+        --secondary-800: #20206A;
+        --secondary-900: #0F0F33;
+        --secondary-950: #08081B;
+
+        --accent-50: #FBEAF0;
+        --accent-100: #F6D0DE;
+        --accent-200: #EDA1BD;
+        --accent-300: #E5769F;
+        --accent-400: #DC477E;
+        --accent: #C52660;
+        --accent-600: #9E1E4D;
+        --accent-700: #78173B;
+        --accent-800: #4D0F26;
+        --accent-900: #260713;
+        --accent-950: #15040A;
+    }
+
+    .dark {
+        --text-color: #e4e4e6;
+        --background: #141516;
+
+        --primary-50: #F4F4FB;
+        --primary-100: #ECECF8;
+        --primary-200: #D6D6F0;
+        --primary-300: #C4C4E9;
+        --primary-400: #ADADE1;
+        --primary: #9999D9;
+        --primary-600: #6363C5;
+        --primary-700: #3D3DA3;
+        --primary-800: #28286C;
+        --primary-900: #151538;
+        --primary-950: #0A0A1A;
+
+
+        --secondary-50: #E3E3F7;
+        --secondary-100: #CCCCF0;
+        --secondary-200: #9595DF;
+        --secondary-300: #6262D0;
+        --secondary-400: #3737B9;
+        --secondary: #272783;
+        --secondary-600: #20206A;
+        --secondary-700: #17174F;
+        --secondary-800: #0F0F33;
+        --secondary-900: #08081C;
+        --secondary-950: #04040C;
+
+        --accent-50: #FBEAF0;
+        --accent-100: #F8D8E4;
+        --accent-200: #F0B2CA;
+        --accent-300: #E887AC;
+        --accent-400: #E16092;
+        --accent: #DA3A76;
+        --accent-600: #B9235C;
+        --accent-700: #891A45;
+        --accent-800: #5E122F;
+        --accent-900: #2F0918;
+        --accent-950: #15040B;
+    }
+}
