@@ -1,24 +1,46 @@
 {% extends 'sidemenu.html' %}
 
 {% block content %}
-    <div id="content">
-        <h2>My Projects</h2>
-        <div>
+    <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-7 mx-auto">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {% for project in projects %}
-                <div class="project-card">
-                    <h3><a href="{% url 'project_detail' project.id %}">{{ project.name }}</a></h3>
-                    <p>Founder: {{ project.founder.username }}</p>
-                    <p>Description: {{ project.description|truncatechars:75 }}</p>
+                <div class="group flex flex-col h-full bg-white border border-gray-200 shadow-sm rounded-xl dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70">
+
+                    <div class="p-4 md:p-6">
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-neutral-300 dark:hover:text-white">
+                            {{ project.name }}
+                        </h3>
+                        <p class="mt-3 text-gray-500 dark:text-neutral-500">
+                            {{ project.description|truncatechars:50 }}
+                        </p>
+                    </div>
+
+                    <div class="mt-auto flex border-t border-gray-200 divide-x divide-gray-200 dark:border-neutral-700 dark:divide-neutral-700">
+                        <a class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-es-xl bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800"
+                           href="#">
+                            Add task
+                        </a>
+                        <a class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-ee-xl bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800"
+                           href="{% url 'project_detail' project.id %}">
+                            View details
+                        </a>
+                    </div>
                 </div>
             {% endfor %}
-            <div>
-                <a href="{% url 'project_create' %}">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                         stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                              d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"></path>
-                    </svg>
-                </a>
+
+            <div class="group flex flex-col h-full bg-white border border-gray-200 shadow-sm rounded-xl dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70">
+                <div class="mt-auto flex border-t border-gray-200 divide-x divide-gray-200 dark:border-neutral-700 dark:divide-neutral-700">
+                    <a class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-es-xl bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800"
+                       href="{% url 'project_create' %}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                             class="lucide lucide-folder-plus">
+                            <path d="M12 10v6"></path>
+                            <path d="M9 13h6"></path>
+                            <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"></path>
+                        </svg>
+                    </a>
+                </div>
             </div>
         </div>
     </div>

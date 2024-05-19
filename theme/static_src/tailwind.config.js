@@ -6,6 +6,7 @@
  */
 
 module.exports = {
+    darkMode: 'selector',
     content: [
         /**
          * HTML. Paths to Django template files that will contain Tailwind CSS classes.
@@ -44,7 +45,31 @@ module.exports = {
         'node_modules/preline/dist/*.js',
     ],
     theme: {
-        extend: {},
+        textColor: {
+            DEFAULT: 'var(--text-color)'
+        },
+
+        fontFamily: {
+            title: ['Assistant', 'sans-serif'],
+            paragraph: ['Work Sans', 'sans-serif'],
+            complementary: ['Hind Madurai', 'sans-serif'],
+        },
+        extend: {
+            colors: {
+                primary: {
+                    DEFAULT: 'var(--primary)',
+                },
+                secondary: {
+                    DEFAULT: 'var(--secondary)',
+                },
+                accent: {
+                    DEFAULT: 'var(--accent)',
+                },
+                background: {
+                    DEFAULT: 'var(--background)',
+                }
+            },
+        },
     },
     plugins: [
         /**
