@@ -15,9 +15,12 @@
                 <li><a href="/tasks">Tasks</a></li>
                 <li><a href="/profile">Profile</a></li>
             </ul>
-            <button>
-                <a href="{% url 'logout' %}">Log out</a>
-            </button>
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">
+                    Log out
+                </button>
+            </form>
         </div>
         {% block content %}
         {% endblock %}
