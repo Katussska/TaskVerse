@@ -61,7 +61,7 @@
             <!-- Logo -->
             <a class="flex-none rounded-xl text-xl inline-block font-semibold focus:outline-none focus:opacity-80"
                href="/projects" aria-label="TaskVerse">
-                Logo 
+                Logo
             </a>
             <!-- End Logo -->
         </div>
@@ -102,6 +102,14 @@
                         </svg>
                         Profile
                     </a>
+                </li>
+                <li>
+                    <form action="{% url 'logout' %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit">
+                            Log out
+                        </button>
+                    </form>
                 </li>
             </ul>
         </nav>

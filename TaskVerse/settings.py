@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'comments',
     'tailwind',
     'theme',
-    'django_browser_reload'
+    'django_browser_reload',
+    'widget_tweaks',
+    'ui'
 ]
 
 TAILWIND_APP_NAME = 'theme'
