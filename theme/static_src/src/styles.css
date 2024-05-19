@@ -6,6 +6,7 @@
     :root {
         --text-color: #18181b;
         --background: #eaebec;
+        --background-alt: #B9BDC0;
 
         --primary-50: #E5E5F5;
         --primary-100: #C7C7EA;
@@ -44,9 +45,11 @@
         --accent-950: #15040A;
     }
 
+    /*@media (prefers-color-scheme: dark) {*/
     .dark {
         --text-color: #e4e4e6;
         --background: #141516;
+        --background-alt: #35383B;
 
         --primary-50: #F4F4FB;
         --primary-100: #ECECF8;
@@ -85,6 +88,7 @@
         --accent-900: #2F0918;
         --accent-950: #15040B;
     }
+
 }
 
 body {
