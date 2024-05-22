@@ -37,7 +37,7 @@ class Tag(models.Model):
         elif self.custom_name:
             return self.custom_name
         else:
-            return "Unnamed Tag"
+            return 'Unnamed Tag'
 
     def save(self, *args, **kwargs):
         if self.name and not self.color:
@@ -67,13 +67,42 @@ class Priority(models.Model):
 class Task(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
-    priority = models.ForeignKey(Priority, on_delete=models.CASCADE)
-    tags = models.ManyToManyField(Tag, related_name='tasks', blank=True)
-    status = models.CharField(max_length=100, choices=[('Not completed', 'Not completed'), ('Completed', 'Completed'),
-                                                       ('In progress', 'In progress')])
-    completion_date = models.DateTimeField(null=True, blank=True)
-    project = models.ForeignKey(Project, on_delete=models.CASCADE)
-    assigned_to = models.ForeignKey(User, related_name='assigned_tasks', on_delete=models.CASCADE)
+    priority = models.ForeignKey(
+        Priority,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
+    )
+    tags = models.ManyToManyField(
+        Tag,
+        related_name='tasks',
+        null=True,
+        blank=True
+    )
+    status = models.CharField(
+        max_length=100,
+        choices=[
+            ('Pending', 'Pending'),
+            ('In progress', 'In progress'),
+            ('Done', 'Done'),
+        ],
+        default=('Pending', 'Pending')
+    )
+    completion_date = models.DateTimeField(
+        null=True,
+        blank=True
+    )
+    project = models.ForeignKey(
+        Project,
+        on_delete=models.CASCADE
+    )
+    assigned_to = models.ForeignKey(
+        User,
+        related_name='assigned_tasks',
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
+    )
 
     def __str__(self):
         return self.name
