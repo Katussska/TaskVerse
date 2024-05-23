@@ -22,10 +22,15 @@ class ProjectCreateView(CreateView):
     template_name = 'project_create.html'
     success_url = reverse_lazy('project_list')
 
+    def get_form_kwargs(self):
+        kwargs = super(CreateView, self).get_form_kwargs()
+        kwargs.update({'user': self.request.user})
+        return kwargs
+
     def form_valid(self, form):
         form.instance.founder = self.request.user
         response = super().form_valid(form)
-        self.object.team.set(form.cleaned_data['team_usernames'])
+        form.instance.team.add(*form.cleaned_data['team_members'])
         return response
 
 

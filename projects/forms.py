@@ -1,32 +1,28 @@
 from django import forms
 from django.contrib.auth import get_user_model
-from django.core.exceptions import ValidationError
 
+from ui.ui import TextInput, TextArea, SelectMultiple
 from .models import Project
 
 User = get_user_model()
 
 
 class ProjectForm(forms.ModelForm):
-    team_usernames = forms.CharField(required=False)
+    name = forms.CharField(label='Name', widget=TextInput(attrs={
+        'name': 'name',
+    }))
+    description = forms.CharField(label='Description', widget=TextArea)
+
+    team_members = forms.ModelMultipleChoiceField(widget=SelectMultiple,
+                                                  required=False,
+                                                  queryset=User.objects.none())
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user')
+        super(ProjectForm, self).__init__(*args, **kwargs)
+        if self.user:
+            self.fields['team_members'].queryset = User.objects.exclude(id=self.user.id)
 
     class Meta:
         model = Project
         fields = ['name', 'description']
-
-    def clean_team_usernames(self):
-        usernames = self.cleaned_data.get('team_usernames')
-
-        if not usernames:  # if usernames is empty, return an empty list
-            return []
-
-        users = []
-
-        for username in usernames.split(','):
-            try:
-                user = User._default_manager.get(username=username.strip())
-                users.append(user)
-            except User.DoesNotExist:
-                raise ValidationError(f'User with username {username} does not exist.')
-            
-        return users
