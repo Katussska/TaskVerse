@@ -50,6 +50,20 @@ asgiref = ">=3.6"
 Django = ">=3.2"
 
 [[package]]
+name = "django-components"
+version = "0.76"
+description = "A way to create simple reusable template components in Django."
+optional = false
+python-versions = "<4.0,>=3.8"
+files = [
+    {file = "django_components-0.76-py3-none-any.whl", hash = "sha256:c6672a90440d0d879020296473e326c93b16e596449846cb0ed89ed2691d5511"},
+    {file = "django_components-0.76.tar.gz", hash = "sha256:f4615bcee22d1dc7a5199ca9f3f8aedec77b528fc69ee15f5b6a30d103584f4e"},
+]
+
+[package.dependencies]
+Django = ">=4.2"
+
+[[package]]
 name = "django-tailwind"
 version = "3.8.0"
 description = "Tailwind CSS Framework for Django projects"
@@ -219,4 +233,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "2b458a758ac8c784532eb4c25f4319acb5311821274570461873a08d13c5d49c"
+content-hash = "c271c46d502e8f5d5c59dccb5a10d8a026c1df8c1c735526d9805c44cef36d71"

@@ -1,0 +1,20 @@
+<span
+        {% if priority == 'Low' %}
+            class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium border border-gray-800 text-gray-800 dark:border-neutral-200 dark:text-white"
+        {% elif priority == 'Normal' %}
+            class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium border border-blue-600 text-blue-600 dark:text-blue-500"
+        {% elif priority == 'High' %}
+            class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium border border-yellow-500 text-yellow-500"
+        {% elif priority == 'Urgent' %}
+            class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium border border-red-500 text-red-500"
+            {# Low #}
+        {% else %}
+            class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium border border-gray-500 text-gray-500 dark:text-neutral-400"
+        {% endif %}
+>
+    {% if priority %}
+        {{ priority }}
+    {% else %}
+        No Priority
+    {% endif %}
+</span>

@@ -27,6 +27,6 @@ urlpatterns = [
                   path('', RedirectView.as_view(url='users/login/'), name='redirect-to-login'),
                   path('users/', include('users.urls')),
                   path('projects/', include('projects.urls')),
-                  # path('tasks/', include('tasks.urls')),
+                  path('tasks/', include('tasks.urls')),
                   # path('comments/', include('comments.urls')),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
