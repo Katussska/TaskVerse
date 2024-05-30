@@ -65,12 +65,16 @@ class Priority(models.Model):
 
 
 class Task(models.Model):
+    class Status(models.TextChoices):
+        PENDING = 'Pending'
+        IN_PROGRESS = 'In progress'
+        DONE = 'Done'
+
     name = models.CharField(max_length=100)
     description = models.TextField()
     priority = models.ForeignKey(
         Priority,
         on_delete=models.CASCADE,
-        null=True,
         blank=True
     )
     tags = models.ManyToManyField(
@@ -81,12 +85,8 @@ class Task(models.Model):
     )
     status = models.CharField(
         max_length=100,
-        choices=[
-            ('Pending', 'Pending'),
-            ('In progress', 'In progress'),
-            ('Done', 'Done'),
-        ],
-        default=('Pending', 'Pending')
+        choices=Status.choices,
+        default=Status.PENDING
     )
     completion_date = models.DateTimeField(
         null=True,

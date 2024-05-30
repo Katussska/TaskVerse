@@ -43,6 +43,7 @@ module.exports = {
         // '../../**/*.py'
 
         'node_modules/preline/dist/*.js',
+        '../../**/components/**/*.html',
     ],
     theme: {
 

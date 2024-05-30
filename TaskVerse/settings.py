@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_browser_reload',
     'widget_tweaks',
+    'django_components',
     'tailwind',
     'users',
     'projects',
@@ -68,9 +69,10 @@ ROOT_URLCONF = 'TaskVerse.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
-        ,
-        'APP_DIRS': True,
+        'DIRS': [
+            BASE_DIR / 'templates',
+            BASE_DIR / 'ui/components'
+        ],
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -78,6 +80,16 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'loaders': [(
+                'django.template.loaders.cached.Loader', [
+                    'django.template.loaders.filesystem.Loader',
+                    'django.template.loaders.app_directories.Loader',
+                    'django_components.template_loader.Loader',
+                ]
+            )],
+            'builtins': [
+                'django_components.templatetags.component_tags',
+            ]
         },
     },
 ]
@@ -127,6 +139,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'ui/components')
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
