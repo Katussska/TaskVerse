@@ -2,6 +2,7 @@ from django.forms.renderers import get_default_renderer
 from django.forms.widgets import TextInput as DjangoTextInput
 from django.forms.widgets import Textarea as DjangoTextArea
 from django.forms.widgets import SelectMultiple as DjangoSelectMultiple
+from django.forms.widgets import Select as DjangoSelect
 from django.utils.safestring import mark_safe
 
 
@@ -28,4 +29,7 @@ class TextArea(DjangoTextArea):
 
 class SelectMultiple(DjangoSelectMultiple):
     template_name = 'select_multiple.html'
-   
+
+
+class Select(DjangoSelect):
+    template_name = 'select.html'

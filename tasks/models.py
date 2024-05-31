@@ -45,37 +45,25 @@ class Tag(models.Model):
         super().save(*args, **kwargs)
 
 
-class Priority(models.Model):
-    LOW = 'Low'
-    NORMAL = 'Normal'
-    HIGH = 'High'
-    URGENT = 'Urgent'
-
-    PRIORITY_CHOICES = [
-        (LOW, 'Low'),
-        (NORMAL, 'Normal'),
-        (HIGH, 'High'),
-        (URGENT, 'Urgent'),
-    ]
-
-    name = models.CharField(max_length=100, choices=PRIORITY_CHOICES)
-
-    def __str__(self):
-        return self.name
-
-
 class Task(models.Model):
     class Status(models.TextChoices):
         PENDING = 'Pending'
         IN_PROGRESS = 'In progress'
         DONE = 'Done'
 
+    class Priority(models.TextChoices):
+        NONE = 'None'
+        LOW = 'Low'
+        NORMAL = 'Normal'
+        HIGH = 'High'
+        URGENT = 'Urgent'
+
     name = models.CharField(max_length=100)
     description = models.TextField()
-    priority = models.ForeignKey(
-        Priority,
-        on_delete=models.CASCADE,
-        blank=True
+    priority = models.CharField(
+        max_length=100,
+        choices=Priority.choices,
+        default=Priority.NONE
     )
     tags = models.ManyToManyField(
         Tag,

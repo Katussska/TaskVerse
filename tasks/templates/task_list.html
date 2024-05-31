@@ -85,42 +85,42 @@
                                 {% for task in tasks.object_list %}
                                     <tr class="bg-white hover:bg-gray-50 dark:bg-neutral-900 dark:hover:bg-neutral-800">
                                         <td class="size-px whitespace-nowrap">
-                                            <a href="/tasks/{{ task.id }}" class="block">
+                                            <a href="/projects/{{ task.project_id }}/tasks/{{ task.id }}" class="block">
                                             <span class="block px-6 py-2">
                                                 <span class="font-mono text-sm text-blue-600 dark:text-blue-500">#{{ task.id }}</span>
                                             </span>
                                             </a>
                                         </td>
                                         <td class="size-px whitespace-nowrap">
-                                            <a href="/tasks/{{ task.id }}" class="block">
+                                            <a href="/projects/{{ task.project_id }}/tasks/{{ task.id }}" class="block">
                                             <span class="block px-6 py-2">
                                                 <span class="text-sm text-gray-600 dark:text-neutral-400">{{ task.project.name }}</span>
                                             </span>
                                             </a>
                                         </td>
                                         <td class="size-px whitespace-nowrap">
-                                            <a href="/tasks/{{ task.id }}" class="block">
+                                            <a href="/projects/{{ task.project_id }}/tasks/{{ task.id }}" class="block">
                                             <span class="block px-6 py-2">
                                                 {% component "StatusBadge" status=task.status %}{% endcomponent %}
                                             </span>
                                             </a>
                                         </td>
                                         <td class="size-px whitespace-nowrap">
-                                            <a href="/tasks/{{ task.id }}" class="block">
+                                            <a href="/projects/{{ task.project_id }}/tasks/{{ task.id }}" class="block">
                                             <span class="block px-6 py-2">
                                                 <span class="text-sm">{{ task.name }}</span>
                                             </span>
                                             </a>
                                         </td>
                                         <td class="size-px whitespace-nowrap">
-                                            <a href="/tasks/{{ task.id }}" class="block">
+                                            <a href="/projects/{{ task.project_id }}/tasks/{{ task.id }}" class="block">
                                             <span class="block px-6 py-2">
                                                 {% component "UserBadge" user=task.assigned_to %}{% endcomponent %}
                                             </span>
                                             </a>
                                         </td>
                                         <td class="size-px whitespace-nowrap">
-                                            <a href="/tasks/{{ task.id }}" class="block">
+                                            <a href="/projects/{{ task.project_id }}/tasks/{{ task.id }}" class="block">
                                             <span class="block px-6 py-2">
                                                 {% component "PriorityBadge" priority=task.priority %}{% endcomponent %}
                                             </span>
@@ -157,38 +157,14 @@
                                 </div>
 
                                 <h2 class="mt-5 font-semibold text-gray-800 dark:text-white">
-                                    No draft test invoices
+                                    No tasks
                                 </h2>
                                 <p class="mt-2 text-sm text-gray-600 dark:text-neutral-400">
-                                    Draft an invoice and send it to a customer.
+                                    Create a task and assign it to someone.
                                 </p>
-                                <div>
-                                    <a class="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline font-medium dark:text-blue-500"
-                                       href="../docs/index.html">
-                                        Learn more
-                                        <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
-                                             height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="m9 18 6-6-6-6"/>
-                                        </svg>
-                                    </a>
-                                </div>
 
                                 <div class="mt-5 grid sm:flex gap-2">
-                                    <button type="button"
-                                            class="py-2 px-3 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
-                                        <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
-                                             height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M5 12h14"/>
-                                            <path d="M12 5v14"/>
-                                        </svg>
-                                        Create a new task
-                                    </button>
-                                    <button type="button"
-                                            class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800">
-                                        Use a Template
-                                    </button>
+                                    {% component "Button" label="New task" href="/tasks/create" icon='plus' %}{% endcomponent %}
                                 </div>
                             </div>
                         {% endif %}

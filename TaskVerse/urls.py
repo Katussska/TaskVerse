@@ -21,12 +21,15 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import RedirectView
 
+from tasks import views as taskViews
+
 urlpatterns = [
                   path('__reload__/', include('django_browser_reload.urls')),
                   path('admin/', admin.site.urls),
                   path('', RedirectView.as_view(url='users/login/'), name='redirect-to-login'),
                   path('users/', include('users.urls')),
                   path('projects/', include('projects.urls')),
-                  path('tasks/', include('tasks.urls')),
+                  path('projects/', include('tasks.urls')),
+                  path('tasks/', taskViews.task_list, name='task_list'),
                   # path('comments/', include('comments.urls')),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
