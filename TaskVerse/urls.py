@@ -22,6 +22,7 @@ from django.urls import path, include
 from django.views.generic import RedirectView
 
 from tasks import views as taskViews
+from users.views import profile
 
 urlpatterns = [
                   path('__reload__/', include('django_browser_reload.urls')),
@@ -31,5 +32,6 @@ urlpatterns = [
                   path('projects/', include('projects.urls')),
                   path('projects/', include('tasks.urls')),
                   path('tasks/', taskViews.task_list, name='task_list'),
+                  path('profile/', profile, name='profile')
                   # path('comments/', include('comments.urls')),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

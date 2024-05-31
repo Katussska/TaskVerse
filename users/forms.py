@@ -1,5 +1,5 @@
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from ui.ui import TextInput
+from ui.ui import TextInput, TextArea
 from django import forms
 
 from .models import User
@@ -37,3 +37,30 @@ class RegisterForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2', 'profile_picture']
+
+
+class UserProfileForm(forms.ModelForm):
+    profile_picture = forms.ClearableFileInput(attrs={'class': 'form-control-file'})
+    first_name = forms.CharField(label='First name', widget=TextInput(attrs={
+        'name': 'first_name',
+        'placeholder': 'Michal'
+    }))
+    last_name = forms.CharField(label='Last name', widget=TextInput(attrs={
+        'name': 'last_name',
+        'placeholder': 'Kratky'
+    }))
+    email = forms.CharField(label='Email', widget=TextInput(attrs={
+        'type': 'email',
+        'name': 'email',
+    }))
+    bio = forms.CharField(label='Bio', widget=TextArea)
+
+    class Meta:
+        model = User
+        fields = [
+            'profile_picture',
+            'first_name',
+            'last_name',
+            'email',
+            'bio',
+        ]
