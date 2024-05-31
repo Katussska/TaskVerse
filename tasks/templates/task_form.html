@@ -26,7 +26,12 @@
                     <div class="flex flex-col gap-4">
                         <div>
                             <h5 class="font-bold text-gray-800 mb-2">Project</h5>
-                            <span class="text-sm text-gray-700">{{ task.project.name }}</span>
+                            <span class="text-sm text-gray-700">
+                                {% if project %}
+                                    {{ project.name }}
+                                {% endif %}
+                                {{ task.project.name }}
+                            </span>
                         </div>
                         <div>
                             <h5 class="font-bold text-gray-800 mb-2">Assignee</h5>

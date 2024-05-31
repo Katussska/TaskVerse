@@ -1,9 +1,10 @@
 from django.core.paginator import Paginator
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, UpdateView
 
-from tasks.forms import TaskForm
+from projects.models import Project
+from tasks.forms import EditTaskForm, CreateTaskForm
 from tasks.models import Task
 
 
@@ -28,14 +29,49 @@ class TaskDetailView(DetailView):
         project_id = self.object.project.id
         task_id = self.object.id
         context['edit_url'] = f'/projects/{project_id}/tasks/{task_id}/edit'
-        context['new_url'] = f'/projects/{project_id}/tasks/new'
+        context['new_url'] = f'/projects/{project_id}/tasks/create'
         return context
+
+
+# class TaskCreateView(CreateView):
+#     model = Task
+#     form_class = EditTaskForm
+#     template_name = 'task_form.html'
+# 
+#     def get_form_kwargs(self):
+#         kwargs = super(TaskCreateView, self).get_form_kwargs()
+#         self.project = get_object_or_404(Project, pk=self.kwargs['projectId'])
+#         kwargs.update({'project': self.project})
+#         return kwargs
+
+def create_task(request, projectId):
+    project = get_object_or_404(Project, id=projectId)
+    team_members = project.team.all()
+
+    if request.method == 'POST':
+        form = CreateTaskForm(request.POST)
+        form.fields['assignee'].queryset = team_members
+        if form.is_valid():
+            task = form.save(commit=False)
+            task.project = project
+            task.save()
+            return redirect('project_detail',
+                            projectId=project.id)
+        else:
+            print('Form is not valid')
+            print(form.errors)
+    else:
+        form = CreateTaskForm()
+
+    form.fields['assignee'].queryset = team_members
+
+    return render(request, 'task_form.html', {'form': form, 'project': project})
 
 
 class TaskEditView(UpdateView):
     model = Task
     template_name = 'task_form.html'
-    form_class = TaskForm
+    form_class = EditTaskForm
 
     def get_success_url(self):
         return reverse_lazy('task_detail', kwargs={
