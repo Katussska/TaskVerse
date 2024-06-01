@@ -56,7 +56,7 @@ def create_task(request, projectId):
             task.project = project
             task.save()
             return redirect('project_detail',
-                            projectId=project.id)
+                            pk=project.id)
         else:
             print('Form is not valid')
             print(form.errors)
