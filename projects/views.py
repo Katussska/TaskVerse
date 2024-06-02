@@ -35,6 +35,7 @@ class ProjectCreateView(CreateView):
         form.instance.founder = self.request.user
         response = super().form_valid(form)
         form.instance.team.add(*form.cleaned_data['team_members'])
+        form.instance.team.add(form.instance.founder)
         return response
 
 
