@@ -1,4 +1,5 @@
 from django.core.paginator import Paginator
+from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.decorators.http import require_POST
@@ -12,11 +13,7 @@ from .models import Project
 
 
 def project_list(request):
-    founded_projects = Project.objects.filter(founder=request.user)
-    team_projects = Project.objects.filter(team=request.user)
-
-    projects = founded_projects | team_projects
-
+    projects = Project.objects.filter(Q(founder=request.user) | Q(team=request.user)).distinct()
     return render(request, 'project_list.html', {'projects': projects})
 
 
