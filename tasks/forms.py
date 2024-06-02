@@ -15,7 +15,7 @@ class EditTaskForm(forms.ModelForm):
         widget=Select,
         queryset=Project.objects.all()
     )
-    assignee = forms.ModelChoiceField(
+    assigned_to = forms.ModelChoiceField(
         widget=Select,
         queryset=User.objects.none(),
         required=False
@@ -34,7 +34,7 @@ class EditTaskForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         if self.instance and self.instance.project:
-            self.fields['assignee'].queryset = User.objects.filter(projects__in=[self.instance.project])
+            self.fields['assigned_to'].queryset = User.objects.filter(projects__in=[self.instance.project])
 
     class Meta:
         model = Task
@@ -42,7 +42,7 @@ class EditTaskForm(forms.ModelForm):
             'name',
             'description',
             'project',
-            'assignee',
+            'assigned_to',
             'priority',
             'status'
         ]
@@ -54,7 +54,7 @@ class CreateTaskForm(forms.ModelForm):
         fields = [
             'name',
             'description',
-            'assignee',
+            'assigned_to',
             'priority',
             'status'
         ]
@@ -66,7 +66,7 @@ class CreateTaskForm(forms.ModelForm):
     description = forms.CharField(label='Description', widget=TextArea(attrs={
         'placeholder': 'Task description'
     }))
-    assignee = forms.ModelChoiceField(
+    assigned_to = forms.ModelChoiceField(
         widget=Select,
         queryset=User.objects.none(),
         required=False
@@ -84,4 +84,4 @@ class CreateTaskForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(CreateTaskForm, self).__init__(*args, **kwargs)
-        self.fields['assignee'].label = 'Assignee'
+        self.fields['assigned_to'].label = 'Assignee'

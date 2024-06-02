@@ -38,7 +38,7 @@ def create_task(request, projectId):
 
     if request.method == 'POST':
         form = CreateTaskForm(request.POST)
-        form.fields['assignee'].queryset = team_members
+        form.fields['assigned_to'].queryset = team_members
         if form.is_valid():
             task = form.save(commit=False)
             task.project = project
@@ -52,7 +52,7 @@ def create_task(request, projectId):
     else:
         form = CreateTaskForm()
 
-    form.fields['assignee'].queryset = team_members
+    form.fields['assigned_to'].queryset = team_members
 
     return render(request, 'task_form.html', {'form': form, 'project': project})
 
