@@ -8,7 +8,7 @@ class Button(component.Component):
     template_name = 'template.html'
 
     def get_context_data(self, label: str, href: str = None, icon: str = '', primary: bool = True, submit: bool = False,
-                         disabled: bool = False) -> Dict[
+                         disabled: bool = False, value: str = '') -> Dict[
         str, Any]:
         return {
             'label': label,
@@ -17,4 +17,5 @@ class Button(component.Component):
             'icon': icon,
             'submit': submit,
             'primary': primary,
+            'value': value,
         }

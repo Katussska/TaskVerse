@@ -1,11 +1,13 @@
 from django.core.paginator import Paginator
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
+from django.views.decorators.http import require_POST
 from django.views.generic import CreateView
 from django.views.generic import DetailView
 
 from tasks.models import Task
-from .forms import ProjectForm
+from users.models import User
+from .forms import ProjectForm, AddTeamMemberForm
 from .models import Project
 
 
@@ -44,6 +46,7 @@ class ProjectDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         project_id = self.object.id
         context['new_url'] = f'/projects/{project_id}/tasks/create'
+        context['team_url'] = f'/projects/{project_id}/team/'
         tasks = Task.objects.filter(project_id=project_id)
 
         paginator = Paginator(tasks, 5)
@@ -51,3 +54,24 @@ class ProjectDetailView(DetailView):
         page_obj = paginator.get_page(page_number)
         context['tasks'] = page_obj
         return context
+
+
+def team_members(request, project_id):
+    project = Project.objects.get(id=project_id)
+    if request.method == 'POST':
+        form = AddTeamMemberForm(request.POST, project=project)
+        if form.is_valid():
+            user = form.cleaned_data['user']
+            project.team.add(user)
+            return redirect('team_members', project_id=project.id)
+    else:
+        form = AddTeamMemberForm(project=project)
+    return render(request, 'project_team.html', {'project': project, 'form': form})
+
+
+@require_POST
+def remove_team_member(request, user_id, project_id):
+    project = Project.objects.get(id=project_id)
+    user = User.objects.get(id=user_id)
+    project.team.remove(user)
+    return redirect('team_members', project_id=project.id)

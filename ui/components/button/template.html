@@ -1,7 +1,14 @@
 {% if submit %}
     <button type="submit"
+            value="{{ value }}"
+            {% if primary %}
             class="py-2 px-3 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border
         border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
+            {% else %}
+            class="py-2 px-3 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200
+            bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none
+            dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800"
+            {% endif %}
             {% if disabled %}
             disabled
             {% endif %}
@@ -12,6 +19,14 @@
                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M5 12h14"/>
                 <path d="M12 5v14"/>
+            </svg>
+        {% elif icon == 'user_remove' %}
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                 class="lucide lucide-user-round-minus">
+                <path d="M2 21a8 8 0 0 1 13.292-6"/>
+                <circle cx="10" cy="8" r="5"/>
+                <path d="M22 19h-6"/>
             </svg>
         {% endif %}
         {{ label }}
@@ -37,6 +52,13 @@
                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M5 12h14"/>
                 <path d="M12 5v14"/>
+            </svg>
+        {% elif icon == 'user_remove' %}
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                 class="lucide lucide-user-round">
+                <circle cx="12" cy="8" r="5"/>
+                <path d="M20 21a8 8 0 0 0-16 0"/>
             </svg>
         {% endif %}
         {{ label }}

@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth import get_user_model
 
-from ui.ui import TextInput, TextArea, SelectMultiple
+from ui.ui import TextInput, TextArea, SelectMultiple, Select
 from .models import Project
 
 User = get_user_model()
@@ -26,3 +26,15 @@ class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
         fields = ['name', 'description']
+
+
+class AddTeamMemberForm(forms.Form):
+    user = forms.ModelChoiceField(
+        widget=Select,
+        queryset=User.objects.all()
+    )
+
+    def __init__(self, *args, **kwargs):
+        self.project = kwargs.pop('project')
+        super().__init__(*args, **kwargs)
+        self.fields['user'].queryset = User.objects.exclude(id__in=self.project.team.all())

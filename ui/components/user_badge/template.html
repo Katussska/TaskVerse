@@ -1,6 +1,20 @@
 <div class="inline-flex flex-nowrap items-center bg-white border border-gray-200 rounded-full p-1.5 pe-3 dark:bg-neutral-900 dark:border-neutral-700">
     {% if user %}
-        <img class="me-1.5 inline-block size-6 rounded-full" src="{{ user.profile_picture.url }}" alt="Profile Picture">
+        {% if user.profile_picture %}
+            <img class="me-1.5 inline-block size-6 rounded-full"
+                 src="{{ user.profile_picture.url }}"
+                 alt="Profile Picture">
+        {% else %}
+            <div class="bg-gray-300 rounded-full p-1.5 mr-2 text-gray-600">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                     viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round"
+                     stroke-linejoin="round" class="lucide lucide-user-round">
+                    <circle cx="12" cy="8" r="5"/>
+                    <path d="M20 21a8 8 0 0 0-16 0"/>
+                </svg>
+            </div>
+        {% endif %}
         <div class="whitespace-nowrap text-sm font-medium text-gray-800 dark:text-white">
             {{ user.username }}
         </div>
