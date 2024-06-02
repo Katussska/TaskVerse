@@ -33,17 +33,6 @@ class TaskDetailView(DetailView):
         return context
 
 
-# class TaskCreateView(CreateView):
-#     model = Task
-#     form_class = EditTaskForm
-#     template_name = 'task_form.html'
-# 
-#     def get_form_kwargs(self):
-#         kwargs = super(TaskCreateView, self).get_form_kwargs()
-#         self.project = get_object_or_404(Project, pk=self.kwargs['projectId'])
-#         kwargs.update({'project': self.project})
-#         return kwargs
-
 def create_task(request, projectId):
     project = get_object_or_404(Project, id=projectId)
     team_members = project.team.all()
@@ -55,8 +44,9 @@ def create_task(request, projectId):
             task = form.save(commit=False)
             task.project = project
             task.save()
-            return redirect('project_detail',
-                            pk=project.id)
+            return redirect('task_detail',
+                            projectId=project.id,
+                            pk=task.id)
         else:
             print('Form is not valid')
             print(form.errors)
