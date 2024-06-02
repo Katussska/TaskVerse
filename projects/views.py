@@ -2,12 +2,12 @@ from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.decorators.http import require_POST
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView
 from django.views.generic import DetailView
 
 from tasks.models import Task
 from users.models import User
-from .forms import ProjectForm, AddTeamMemberForm
+from .forms import ProjectForm, AddTeamMemberForm, UpdateProjectForm
 from .models import Project
 
 
@@ -39,6 +39,15 @@ class ProjectCreateView(CreateView):
         return response
 
 
+class ProjectUpdateView(UpdateView):
+    model = Project
+    form_class = UpdateProjectForm
+    template_name = 'project_create.html'
+
+    def get_success_url(self):
+        return reverse_lazy('project_detail', kwargs={'pk': self.object.id})
+
+
 class ProjectDetailView(DetailView):
     model = Project
     template_name = 'project_detail.html'
@@ -48,6 +57,7 @@ class ProjectDetailView(DetailView):
         project_id = self.object.id
         context['new_url'] = f'/projects/{project_id}/tasks/create'
         context['team_url'] = f'/projects/{project_id}/team/'
+        context['edit_url'] = f'/projects/{project_id}/update/'
         tasks = Task.objects.filter(project_id=project_id)
 
         paginator = Paginator(tasks, 5)

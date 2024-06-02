@@ -3,13 +3,18 @@
 {% block content %}
     <div class="max-w-4xl px-4 pb-5 pt-14  mx-auto"><!-- Card -->
         <div class="bg-white rounded-xl shadow p-4 sm:p-7 dark:bg-neutral-800">
-            <div class="mb-8">
-                <h2 class="text-xl font-bold text-gray-800 dark:text-neutral-200">
-                    {{ project.name }}
-                </h2>
-                <p class="text-sm text-gray-600 dark:text-neutral-400">
-                    Manage your project.
-                </p>
+            <div class="mb-8 flex justify-between">
+                <div>
+                    <h2 class="text-xl font-bold text-gray-800 dark:text-neutral-200">
+                        {{ project.name }}
+                    </h2>
+                    <p class="text-sm text-gray-600 dark:text-neutral-400">
+                        Manage your project.
+                    </p>
+                </div>
+                <div>
+                    {% component "Button" label="Edit" href=edit_url icon='edit' primary=False %}{% endcomponent %}
+                </div>
             </div>
 
             <!-- Grid -->

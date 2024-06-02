@@ -28,6 +28,17 @@ class ProjectForm(forms.ModelForm):
         fields = ['name', 'description']
 
 
+class UpdateProjectForm(forms.ModelForm):
+    name = forms.CharField(label='Name', widget=TextInput(attrs={
+        'name': 'name',
+    }))
+    description = forms.CharField(label='Description', widget=TextArea)
+
+    class Meta:
+        model = Project
+        fields = ['name', 'description']
+
+
 class AddTeamMemberForm(forms.Form):
     user = forms.ModelChoiceField(
         widget=Select,
