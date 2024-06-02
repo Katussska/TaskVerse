@@ -1,4 +1,5 @@
 from django.core.paginator import Paginator
+from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, UpdateView
@@ -9,9 +10,7 @@ from tasks.models import Task
 
 
 def task_list(request):
-    # TODO:
-    # tasks = Task.objects.filter(Q(project__founder=request.user) | Q(project__team=request.user))
-    task_list = Task.objects.all()
+    task_list = Task.objects.filter(Q(project__founder=request.user) | Q(project__team=request.user)).distinct()
     paginator = Paginator(task_list, 10)
 
     page_number = request.GET.get('page')
